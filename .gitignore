@@ -1,0 +1,33 @@
+# Virtual environment — never push this
+venv/
+
+# Database — contains real user data
+*.db
+*.sqlite
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# HuggingFace model cache — 3GB+, never push
+.cache/
+*.safetensors
+*.bin
+
+# Environment variables
+.env
+*.env
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+nohup.out
