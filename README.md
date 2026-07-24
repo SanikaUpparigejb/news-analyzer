@@ -11,7 +11,7 @@ and detects sentiment using HuggingFace Transformer models.
 ## Setup
 
 ### 1. Clone the repo
-git clone https://github.com/yourusername/news-summarizer.git
+git clone https://github.com/SanikaUpparigejb/news-analyzer.git
 cd news-summarizer
 
 ### 2. Create virtual environment
