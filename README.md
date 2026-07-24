@@ -5,7 +5,7 @@ and detects sentiment using HuggingFace Transformer models.
 
 ## Stack
 - **Backend:** FastAPI, SQLAlchemy, SQLite, JWT Auth
-- **AI/ML:** DistilBART-XSum, BART-large-MNLI, DistilBERT-SST2
+- **AI/ML:** DistilBART-XSum, MiniLM NLI, DistilBERT-SST2
 - **Frontend:** Streamlit
 
 ## Setup
