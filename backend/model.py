@@ -26,7 +26,7 @@ bart_model.eval()  # inference mode — disables dropout
 print("Loading classification model...")
 classifier = pipeline(
     "zero-shot-classification",
-    model="facebook/bart-large-mnli"
+    model="cross-encoder/nli-MiniLM2-L6-H768"
 )
 
 print("Loading sentiment model...")
@@ -66,7 +66,7 @@ def summarize(text: str) -> str:
             max_length=120,
             min_length=30,
             length_penalty=2.0,
-            num_beams=4,
+            num_beams=2,
             early_stopping=True
         )
 
