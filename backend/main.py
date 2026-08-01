@@ -8,9 +8,9 @@ from datetime import timedelta
 import models
 import auth
 from database import engine, get_db
-from model import summarize, classify_topic, analyze_sentiment
+from model import summarize, classify_topic, analyze_sentiment,clear_cache
 import time
-from concurrent.futures import ThreadPoolExecutor
+
 
 # Create all tables on startup
 models.Base.metadata.create_all(bind=engine)
@@ -120,20 +120,10 @@ def analyze_article(
     start = time.time()
 
     try:
-        # Run all three models concurrently instead of sequentially.
-        # Each model call is CPU-bound and independent of the others, so
-        # running them on separate threads lets them execute in parallel
-        # (Python releases the GIL during PyTorch's underlying C++ ops),
-        # cutting total wall-clock time roughly to the duration of the
-        # slowest single model instead of the sum of all three.
-        with ThreadPoolExecutor(max_workers=3) as executor:
-            future_summary   = executor.submit(summarize, text)
-            future_topic     = executor.submit(classify_topic, text)
-            future_sentiment = executor.submit(analyze_sentiment, text)
-
-            summary   = future_summary.result()
-            topic     = future_topic.result()
-            sentiment = future_sentiment.result()
+        summary   = summarize(text)
+        topic     = classify_topic(text)
+        sentiment = analyze_sentiment(text)
+        clear_cache()  # free memory after each request
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Model error: {str(e)}")
 
